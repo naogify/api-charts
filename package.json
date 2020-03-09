@@ -1,0 +1,17 @@
+{
+  "name": "myguten-block",
+  "version": "1.0.0",
+  "description": "Test block",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "wp-scripts start",
+    "build": "wp-scripts build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "naogify",
+  "license": "GPL-2.0-only",
+  "devDependencies": {
+    "@wordpress/scripts": "6.0.0"
+  }
+}
