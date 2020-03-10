@@ -47,12 +47,13 @@ function register_myguten_block() {
 				$resources_url = $result["result"]["resources"][0]["url"];
 				$row = 1;
 				if (($handle = fopen($resources_url, "r")) !== FALSE) {
+
 					while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
 						$num = count($data);
 						$return .= "<p> $num fields in line $row: <br /></p>\n";
 						$row++;
-						for ($c=0; $c < $num; $c++) {
-							$return .= $data[$c] . "<br />\n";
+						for ($column=0; $c < $num; $column++) {
+							$return .= $data[$column] . "<br />\n";
 						}
 					}
 					fclose($handle);
