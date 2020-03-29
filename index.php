@@ -22,10 +22,25 @@ function register_myguten_block() {
 	register_block_type( 'api-charts/default', array(
 		'editor_script' => 'api-charts',
 		'render_callback' => function ( $attributes,$content ) {
-			$js = file_get_contents(plugin_dir_path( __FILE__ ).'src/blocks/default/draw-chart.js');
+			$js = file_get_contents(plugin_dir_path( __FILE__ ).'src/blocks/default/drawCharts.js');
+			$js = trim($js);
+			$js = ltrim($js, 'export const drawCharts = () => {');
+			$js = rtrim($js, '}; ');
 			return '<div id="chart_div">Loading Charts ...</div><script type="text/javascript">' . $js .'</script>';
+		},
+	) );
+}
 
-			// $base_url = 'https://catalog.data.metro.tokyo.lg.jp';
+function theme_name_scripts() {
+	wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array(), '1.0.0', false );
+}
+
+add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
+add_action( 'admin_enqueue_scripts', 'theme_name_scripts' );
+
+
+
+	// $base_url = 'https://catalog.data.metro.tokyo.lg.jp';
 			// $tag = 'package_show';
 			// $query = ['id'=>'t000010d0000000068'];
 			// $response = file_get_contents(
@@ -51,13 +66,3 @@ function register_myguten_block() {
 			// 	}
 			// }
 			// return $return;
-		},
-	) );
-}
-
-function theme_name_scripts() {
-	wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array(), '1.0.0', false );
-}
-
-add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
-add_action( 'admin_enqueue_scripts', 'theme_name_scripts' );
